@@ -10,3 +10,100 @@ body {
 #map {
   width: 100%;
   height: 100vh; }
+
+.balloon {
+  position: absolute;
+  left: 50%;
+  margin-left: -190px;
+  top: 50%;
+  margin-top: -263px;
+  width: 380px;
+  min-height: 527px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: none; }
+  .balloon_active {
+    display: block; }
+  .balloon__header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 15px;
+    width: 379px;
+    min-height: 44px;
+    background-color: #ff8663;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 300; }
+    .balloon__header img {
+      margin-right: 5px; }
+    .balloon__header .x {
+      cursor: pointer;
+      width: 15px;
+      height: 15px; }
+  .balloon__reviews {
+    height: 154px;
+    padding: 15px;
+    overflow-y: auto; }
+  .balloon__text {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 22px;
+    margin-top: 10px; }
+    .balloon__text_bold {
+      opacity: 1;
+      font-size: 16px;
+      font-weight: 600; }
+    .balloon__text_thin {
+      opacity: 0.75;
+      color: #4f4f4f;
+      font-size: 16px;
+      font-weight: 400; }
+  .balloon__form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 15px; }
+    .balloon__form h3 {
+      margin-top: 5px;
+      color: #ff8663;
+      font-size: 16px;
+      font-weight: 500;
+      text-transform: uppercase; }
+    .balloon__form form {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column; }
+    .balloon__form button {
+      width: 87px;
+      height: 30px;
+      background-color: #ff8663;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 300;
+      border: none;
+      border-radius: 5px;
+      -ms-flex-item-align: end;
+      align-self: flex-end; }
+    .balloon__form input,
+    .balloon__form textarea {
+      border: 1px solid #c4c4c4;
+      background-color: #ffffff;
+      border-radius: 10px;
+      margin-bottom: 10px; }
+    .balloon__form input {
+      height: 32px; }
+    .balloon__form textarea {
+      height: 129px; }
