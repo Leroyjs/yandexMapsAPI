@@ -1,15 +1,6 @@
 ymaps.ready(init);
 
-let places = [{
-    coords: [56.023, 36.988],
-    adress: 'hint',
-    comments: [{
-        name: 'rvrv',
-        time: '12.12.1231',
-        place: 'rvrv',
-        about: 'rvrtbt'
-    }]
-}]
+let places = []
 
 let balloon = document.querySelector('.balloon');
 let reviews = document.querySelector('.balloon__reviews');
