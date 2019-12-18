@@ -13,12 +13,17 @@ let places = [{
 
 let balloon = document.querySelector('.balloon');
 let reviews = document.querySelector('.balloon__reviews');
+let clusterMain = document.querySelector('.cluster__main');
 let balloonAdress = document.querySelector('.balloon__adress');
 let ok = document.querySelector('.ok');
-console.log(reviews);
-console.log(balloonAdress);
 let x = document.querySelector('.x');
+let clusterX = document.querySelector('.cluster__x');
 let activePlace;
+let activeCluster;
+let clusterPopUp = document.querySelector('.cluster');
+clusterX.addEventListener('click', () => {
+    clusterPopUp.classList.remove('balloon_active');
+})
 x.addEventListener('click', () => {
     balloon.classList.remove('balloon_active');
 })
@@ -27,7 +32,7 @@ ok.addEventListener('click', () => {
 })
 var date = new Date();
 let Year = date.getUTCFullYear();
-let Month = date.getMonth();
+let Month = date.getMonth() + 1;
 let Day = date.getDate();
 
 function init() {
@@ -48,19 +53,46 @@ function init() {
             iconImageHref: 'media/point.png',
             iconImageSize: [44, 66],
             iconImageOffset: [-22, -66]
-        });
+        }, );
         geoPlaces[i].id = id++;
         geoPlaces[i].events.add('click', function(e) {
             let eMap = e.get('target'); // Получение ссылки на объект, сгенерировавший событие (карта).
-            console.log(eMap.id);
             balloon.classList.add('balloon_active');
-            createPopup(eMap.id)
+            createBalloon(eMap.id)
         });
     }
 
     //Кластер
     let cluster = new ymaps.Clusterer({
-
+        clusterDisableClickZoom: true
+    });
+    cluster.events.add('click', function(e) {
+        let eMap = e.get('target'); // Получение ссылки на объект, сгенерировавший событие (карта).
+        if (eMap.properties._data.geoObjects) {
+            activeCluster = [];
+            let reviewsDivs = ''
+            let i = 0;
+            for (i = 0; eMap.properties._data.geoObjects.length > i; i++) {
+                activeCluster.push(eMap.properties._data.geoObjects[i].id);
+                reviewsDivs += `<li class="${'id_'+eMap.properties._data.geoObjects[i].id}">${i+1}</li>`;
+            }
+            createPopup(--i);
+            let ul = document.querySelector('.cluster__ul');
+            ul.innerHTML = reviewsDivs;
+            for (i = 0; eMap.properties._data.geoObjects.length > i; i++) {
+                let li = document.querySelector(`.id_${eMap.properties._data.geoObjects[i].id}`);
+                let liId = eMap.properties._data.geoObjects[i].id;
+                console.log(li);
+                li.addEventListener('click', () => {
+                    createPopup(liId);
+                })
+            }
+            clusterPopUp.classList.add('balloon_active');
+        }
+    });
+    cluster.options.set({
+        clusterBalloonLayout: ymaps.templateLayoutFactory.createClass(""),
+        clusterBalloonShadow: false
     });
 
     myMap.geoObjects.add(cluster);
@@ -77,13 +109,12 @@ function init() {
             getAddress(myPlacemark.geometry.getCoordinates());
         });
         getAddress(coords);
-        console.log(myPlacemark)
         myMap.geoObjects.add(cluster);
         cluster.add(myPlacemark);
         myPlacemark.events.add('click', function(e) {
             balloon.classList.add('balloon_active');
             let eMap = e.get('target'); // Получение ссылки на объект, сгенерировавший событие (карта).
-            createPopup(eMap.id)
+            createBalloon(eMap.id)
         });
     });
     // Создание метки.
@@ -100,7 +131,6 @@ function init() {
     function getAddress(coords) {
         ymaps.geocode(coords).then(function(res) {
             var firstGeoObject = res.geoObjects.get(0);
-            console.log(firstGeoObject.getAddressLine());
             places.push({
                 coords: coords,
                 adress: firstGeoObject.getAddressLine(),
@@ -112,7 +142,7 @@ function init() {
 
 }
 
-function createPopup(id) {
+function createBalloon(id) {
     if (places[id].comments.length == 0) {
         reviews.innerHTML = 'Ничего нет'
     } else {
@@ -120,7 +150,7 @@ function createPopup(id) {
         for (let i = 0; places[id].comments.length > i; i++) {
             reviewsDivs += `
             <span class="balloon__text_bold">${places[id].comments[i].name}</span>
-            <span class="balloon__text_thin">${places[id].comments[i].place} 13.12.2015</span>
+            <span class="balloon__text_thin">${places[id].comments[i].place} ${places[id].comments[i].time}</span>
             <p class="balloon__text">${places[id].comments[i].about}</p>`;
         }
         reviews.innerHTML = reviewsDivs;
@@ -136,11 +166,23 @@ function addComment() {
 
     places[activePlace].comments.push({
         name: nameValue,
-        time: Day + " " + Month + " " + Year,
+        time: Day + "." + Month + "." + Year,
         place: placeValue,
         about: aboutValue
     });
-    createPopup(activePlace);
+    createBalloon(activePlace);
+}
+
+function createPopup(id) {
+    console.log(places[id]);
+    let reviewsDivs = `
+    <h2 class="cluster__adress">${places[id].adress}</h2>`;
+    for (let i = 0; places[id].comments.length > i; i++) {
+        reviewsDivs += `
+        <h3 class="cluster__name">${places[id].comments[i].place}</h3>
+        <p class="cluster__about">${places[id].comments[i].about}</p>`;
+    }
+    clusterMain.innerHTML = reviewsDivs;
 }
 
 
