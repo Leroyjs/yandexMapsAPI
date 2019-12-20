@@ -1,0 +1,186 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap&subset=cyrillic");
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif; }
+
+body {
+  margin: 0; }
+
+li {
+  list-style-type: none;
+  /* Убираем маркеры */ }
+
+ul {
+  margin-left: 0;
+  /* Отступ слева в браузере IE и Opera */
+  padding-left: 0;
+  /* Отступ слева в браузере Firefox, Safari, Chrome */ }
+
+#map {
+  width: 100%;
+  height: 100vh; }
+
+.cluster {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -250px;
+  margin-top: -175px;
+  height: 350px;
+  width: 500px;
+  background-color: #E5E5E5;
+  display: none; }
+  .cluster__adress {
+    margin-bottom: 30px; }
+  .cluster__main {
+    width: 100%;
+    height: 290px;
+    padding-left: 20px;
+    padding-top: 20px;
+    overflow-y: auto; }
+  .cluster h3 {
+    font-size: 18px; }
+  .cluster__time {
+    position: absolute;
+    bottom: 70px;
+    right: 20px; }
+  .cluster__x {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer; }
+  .cluster ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    margin: 0; }
+  .cluster li {
+    width: 40px;
+    height: 59px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: pointer;
+    -webkit-transition: 0.1s;
+    -o-transition: 0.1s;
+    transition: 0.1s;
+    position: relative;
+    z-index: 1; }
+  .cluster li:hover {
+    border-top: 2px solid #000; }
+  .cluster hr {
+    margin: 2px; }
+
+.balloon {
+  position: absolute;
+  left: 50%;
+  margin-left: -190px;
+  top: 50%;
+  margin-top: -263px;
+  width: 380px;
+  min-height: 527px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: none; }
+  .balloon_active {
+    display: block; }
+  .balloon__header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 15px;
+    width: 379px;
+    min-height: 44px;
+    background-color: #ff8663;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 300; }
+    .balloon__header img {
+      margin-right: 5px; }
+    .balloon__header .x {
+      cursor: pointer;
+      width: 15px;
+      height: 15px; }
+  .balloon__reviews {
+    height: 154px;
+    padding: 15px;
+    overflow-y: auto; }
+  .balloon__text {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 22px;
+    margin-top: 10px; }
+    .balloon__text_bold {
+      opacity: 1;
+      font-size: 16px;
+      font-weight: 600; }
+    .balloon__text_thin {
+      opacity: 0.75;
+      color: #4f4f4f;
+      font-size: 16px;
+      font-weight: 400; }
+  .balloon__form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 15px; }
+    .balloon__form h3 {
+      margin-top: 5px;
+      color: #ff8663;
+      font-size: 16px;
+      font-weight: 500;
+      text-transform: uppercase; }
+    .balloon__form form {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column; }
+    .balloon__form button {
+      width: 87px;
+      height: 30px;
+      background-color: #ff8663;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 300;
+      border: none;
+      border-radius: 5px;
+      -ms-flex-item-align: end;
+      align-self: flex-end; }
+    .balloon__form input,
+    .balloon__form textarea {
+      border: 1px solid #c4c4c4;
+      background-color: #ffffff;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      padding-left: 10px;
+      font-size: 14px; }
+    .balloon__form input {
+      height: 32px; }
+    .balloon__form textarea {
+      height: 129px;
+      resize: none;
+      padding-top: 10px; }

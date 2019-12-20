@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=c35b54a9-e4ea-4118-91c3-208fe4b75e06&lang=ru_RU" type="text/javascript"></script>
+  <title>{{htmlWebpackPlugin.options.title}}</title>
+</head>
+<body>
+  <div class="container">
+   {{> "./src/templates/geo-content.hbs"}}
+   {{> "./src/templates/cluster.hbs"}}
+   {{> "./src/templates/balloon.hbs"}}
+  </div>
+</body>
+</html>
