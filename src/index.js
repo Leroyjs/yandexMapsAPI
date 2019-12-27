@@ -73,6 +73,9 @@ function init() {
             ul.innerHTML = reviewsDivs;
             for (i = 0; eMap.properties._data.geoObjects.length > i; i++) {
                 let li = document.querySelector(`.id_${eMap.properties._data.geoObjects[i].id}`);
+                li.addEventListener("click", () => {
+                    console.log(places);
+                });
                 let liId = eMap.properties._data.geoObjects[i].id;
                 console.log(li);
                 li.addEventListener('click', () => {
@@ -168,11 +171,18 @@ function addComment() {
 function createPopup(id) {
     console.log(places[id]);
     let reviewsDivs = `
-    <h2 class="cluster__adress">${places[id].adress}</h2>`;
+    <h2 class="cluster__adress"><a class="a${id}" href="#">${places[id].adress}</a></h2>`;
     for (let i = 0; places[id].comments.length > i; i++) {
         reviewsDivs += `
         <h3 class="cluster__name">${places[id].comments[i].place}</h3>
         <p class="cluster__about">${places[id].comments[i].about}</p>`;
     }
     clusterMain.innerHTML = reviewsDivs;
+    let popBalloon = document.querySelector('a.a' + id);
+    popBalloon.addEventListener('click', function(e) {
+        activePlace = id
+        balloon.classList.add('balloon_active');
+        clusterPopUp.classList.remove('balloon_active');
+        createBalloon(activePlace)
+    });
 }
